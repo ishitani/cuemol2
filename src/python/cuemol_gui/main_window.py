@@ -4,7 +4,7 @@ from cuemol_gui.navigators.navigator_manager import NavigatorManager
 from PySide2 import QtCore, QtWidgets
 from PySide2.QtCore import QSettings, Qt
 from PySide2.QtGui import QFont, QIcon
-from PySide2.QtWidgets import QAction, QApplication, QMainWindow, QMdiArea, QTabBar
+from PySide2.QtWidgets import QAction, QApplication, QDockWidget, QMainWindow, QMdiArea, QTabBar
 from qt5gui import QtMolWidget2
 
 import cuemol
@@ -42,6 +42,7 @@ class MainWindow(QMainWindow):
     def init_ui(self):
 
         self.create_widgets()
+        self.create_dock_widgets()
         self.create_menu()
 
         self.statusBar()
@@ -264,6 +265,11 @@ class MainWindow(QMainWindow):
 
         # Set central widget
         self.setCentralWidget(splitter)
+
+    def create_dock_widgets(self):
+        dockw = QDockWidget()
+        dockw.setAllowedAreas(Qt.LeftDockWidgetArea)
+        self.addDockWidget(Qt.LeftDockWidgetArea, dockw)
 
     def create_mol_widget(self, scid, vwid):
         mol_widget = QtMolWidget2()
